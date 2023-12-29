@@ -1,5 +1,6 @@
 import cv2
 import streamlit as st
+import mediapipe as mp
 from streamlit_webrtc import VideoTransformerBase, webrtc_streamer
 from cvzone.HandTrackingModule import HandDetector
 from cvzone.ClassificationModule import Classifier
