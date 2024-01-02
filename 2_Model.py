@@ -10,13 +10,16 @@ st.set_page_config(
     page_title="Sign Language Converter"
 )
 st.sidebar.success("Select a page above.")
+
+
 class HandTrackingTransformer(VideoTransformerBase):
     def __init__(self):
         self.detector = HandDetector(maxHands=1)
         self.classifier = Classifier("Model/keras_model.h5", "Model/labels.txt")
         self.offset = 20
         self.imgSize = 300
-        self.labels = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+        self.labels = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S",
+                       "T", "U", "V", "W", "X", "Y", "Z"]
 
     def transform(self, frame):
         try:
@@ -65,8 +68,8 @@ class HandTrackingTransformer(VideoTransformerBase):
         except AttributeError as e:
             st.success("Your Result is Here !")
 
-
         return imgOutput
+
 
 def main():
     st.title("Real Time American Sign Language To Speech Converter")
@@ -75,10 +78,12 @@ def main():
         key="hand-gesture-recognition",
         video_transformer_factory=HandTrackingTransformer,
         async_transform=True,
+        request_timeout=30,
     )
 
     if webrtc_ctx.video_transformer:
         st.image(webrtc_ctx.video_transformer, channels="BGR")
+
 
 if __name__ == "__main__":
     main()
