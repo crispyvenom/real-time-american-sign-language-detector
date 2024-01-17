@@ -7,7 +7,7 @@ cap = cv2.VideoCapture(0)
 detector = HandDetector(maxHands=1)
 offset = 20
 imgSize = 300
-folder = "Data/C"
+folder = "Data/Z"
 counter = 0
 while True:
     success, img = cap.read()
@@ -37,7 +37,7 @@ while True:
         cv2.imshow("ImageWhite", imgWhite)
     cv2.imshow("Image", img)
     key = cv2.waitKey(1)
-    if key == ord("s"):
+    if key == ord("f"):
         counter += 1
         cv2.imwrite(f'{folder}/Image_{time.time()}.jpg',imgWhite)
         print(counter)
